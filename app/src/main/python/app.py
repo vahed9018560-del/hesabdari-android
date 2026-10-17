@@ -59,7 +59,7 @@ def init_db():
 
         CREATE TABLE IF NOT EXISTS invoices(
           id INTEGER PRIMARY KEY,
-          kind TEXT NOT NULL,
+          invoice_type TEXT NOT NULL,
           party_type TEXT NOT NULL,
           party_id INTEGER,
           invoice_date TEXT NOT NULL,
@@ -83,7 +83,7 @@ def init_db():
           id INTEGER PRIMARY KEY,
           party_type TEXT NOT NULL,
           party_id INTEGER NOT NULL,
-          kind TEXT NOT NULL,
+          transaction_type TEXT NOT NULL,
           amount INTEGER NOT NULL,
           transaction_date TEXT NOT NULL,
           description TEXT DEFAULT ''
@@ -97,6 +97,20 @@ def init_db():
           notes TEXT DEFAULT ''
         );
         """)
+
+
+        # سازگاری با دیتابیس‌های قدیمی
+        for table, old_col, new_col in (
+            ("invoices", "kind", "invoice_type"),
+            ("transactions", "kind", "transaction_type"),
+        ):
+            cols = [row[1] for row in c.execute(
+                f"PRAGMA table_info({table})"
+            ).fetchall()]
+            if old_col in cols and new_col not in cols:
+                c.execute(
+                    f"ALTER TABLE {table} RENAME COLUMN {old_col} TO {new_col}"
+                )
 
         if not c.execute("SELECT id FROM users LIMIT 1").fetchone():
             c.execute(
