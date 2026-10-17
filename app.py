@@ -153,10 +153,50 @@ footer{text-align:center;padding:20px;color:#7b8797}
 PAGE = """
 <!doctype html><html lang="fa" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{ title }} - حسابداری من</title>
+<title>{{ title }} - تُندر</title>
 """ + STYLE + """
+
+<style id="tonder-brand-css">
+:root{--tg:#063f35;--tg2:#0b6652;--gold:#d9b45b}
+body{font-family:Tahoma,Arial,sans-serif!important}
+header{background:linear-gradient(120deg,var(--tg),var(--tg2))!important;color:#fff!important;border-bottom:3px solid var(--gold)}
+header h1{color:#f5d88a!important}
+a,button,input[type=submit]{accent-color:var(--tg2)}
+button,input[type=submit]{border-radius:9px}
+.tonder-symbol{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid #d9b45b;border-radius:10px;color:#d9b45b;font-weight:900;font-size:23px;margin-left:8px}
+#tonder-splash{position:fixed;inset:0;z-index:999999;background:radial-gradient(circle at top,#12634f,#063f35 60%,#032a24);color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;box-sizing:border-box;transition:opacity .7s ease}
+#tonder-splash.hide{opacity:0;pointer-events:none}
+.ts-box{max-width:360px;animation:tsrise .8s ease}
+.ts-logo{width:100px;height:100px;margin:auto;border:2px solid #d9b45b;border-radius:28px;display:flex;align-items:center;justify-content:center;color:#f5d88a;font-size:65px;font-weight:900;background:#0b6652;box-shadow:0 0 0 9px #ffffff0a}
+.ts-box h2{font-size:36px;color:#f5d88a;margin:17px 0 3px}
+.ts-en{letter-spacing:4px;font-size:12px;color:#d9b45b}
+.ts-desc{line-height:2;font-size:14px;margin-top:22px;color:#e5eee9}
+.ts-maker{line-height:2;margin-top:18px;color:#f5d88a;font-size:13px}
+.ts-email{direction:ltr;font-size:12px;color:#e5eee9;margin-top:4px}
+.ts-line{height:2px;width:140px;background:#d9b45b;margin:20px auto;animation:tsline 1.3s infinite alternate}
+@keyframes tsrise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes tsline{from{opacity:.3;transform:scaleX(.5)}to{opacity:1;transform:scaleX(1)}}
+</style>
 </head><body>
-<header><h1>📒 حسابداری من</h1>
+<div id="tonder-splash">
+ <div class="ts-box">
+  <div class="ts-logo">T</div>
+  <h2>تُندر</h2><div class="ts-en">TONDER STUDIO</div>
+  <div class="ts-line"></div>
+  <div class="ts-desc">دفتر حسابداری فروشگاه شما<br>مشتریان • خرید و فروش • بدهی‌ها • گزارش‌ها</div>
+  <div class="ts-maker">طراحی و توسعه: عبدالواحد جهانگیری<br>استودیوی تُندر</div>
+  <div class="ts-email">vahed9018560@gmail.com</div>
+ </div>
+</div>
+<script>
+(function(){
+ var s=document.getElementById('tonder-splash');
+ if(!s)return;
+ setTimeout(function(){s.classList.add('hide');setTimeout(function(){s.remove()},750)},3500);
+})();
+</script>
+
+<header><h1><span class="tonder-symbol">T</span> تُندر</h1>
 <div>مدیریت فروشگاه، مشتریان و حساب‌ها</div>
 {% if session.get('user_id') %}
 <nav>
@@ -177,7 +217,7 @@ PAGE = """
 {% with messages=get_flashed_messages() %}{% for m in messages %}
 <div class="notice">{{m}}</div>{% endfor %}{% endwith %}
 {{body|safe}}
-</main><footer>حسابداری من | اطلاعات در پایگاه داده محلی ذخیره می‌شود</footer>
+</main><footer>تُندر | تُندر | اطلاعات در پایگاه داده محلی ذخیره می‌شود</footer>
 </body></html>
 """
 
@@ -679,3 +719,5 @@ if __name__ == "__main__":
     print("ورود اولیه: admin")
     print("رمز اولیه: ChangeMe123!  (پس از ورود تغییر بده)")
     app.run(host="127.0.0.1", port=5000, debug=False)
+
+# TONDER_BRAND_V1

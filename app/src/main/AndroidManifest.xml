@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
-    <application
-        android:label="حسابداری"
+    <application android:icon="@drawable/ic_tonder_launcher"
+        android:label="تُندر"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         android:allowBackup="false">
